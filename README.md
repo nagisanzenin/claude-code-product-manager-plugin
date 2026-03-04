@@ -12,18 +12,42 @@ AI Product Manager that interviews stakeholders, writes BRDs/PRDs, and autonomou
 
 ## Installation
 
-### Option 1: Load directly (for testing)
+### Via Marketplace (Recommended)
+
+```bash
+# Add the marketplace (one time)
+/plugin marketplace add nagisanzenin/nagisanzenin-plugins
+
+# Install the plugin
+/plugin install product-manager@nagisanzenin
+```
+
+### Org-Wide Auto-Install
+
+Add to your project's `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "nagisanzenin": {
+      "source": {
+        "source": "github",
+        "repo": "nagisanzenin/nagisanzenin-plugins"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "product-manager@nagisanzenin": true
+  }
+}
+```
+
+Everyone on the project gets the plugin automatically.
+
+### Load Directly (for testing)
 
 ```bash
 claude --plugin-dir /path/to/product-manager-plugin
-```
-
-### Option 2: Install from marketplace
-
-If published to a marketplace:
-
-```bash
-claude plugin install product-manager@your-marketplace
 ```
 
 ## Usage
@@ -57,8 +81,30 @@ Creates in your project root:
 ```
 BRD/
   INDEX.md                       # Living table of contents
-  2026-03-04-feature-name.md     # One doc per feature
+  YYYY-MM-DD-feature-name.md     # One doc per feature
 ```
+
+### BRD Document Sections
+
+Each feature doc includes:
+
+- **Problem Statement** — What problem and for whom
+- **Proposed Solution** — High-level approach
+- **User Stories** — As a [role], I want [action] so that [benefit]
+- **Acceptance Criteria** — Testable Given/When/Then format
+- **Business Rules** — Unambiguous logic for engineers
+- **Out of Scope** — What this feature does NOT include
+- **Research Notes** — Competitor analysis, domain context
+
+### Verification
+
+The PM autonomously spawns verification agents that compare your implementation against BRD acceptance criteria, reporting:
+
+- **PASS** — Criterion met (cites the code)
+- **FAIL** — Criterion not met (explains what's missing)
+- **PARTIAL** — Partially implemented (explains gap)
+
+BRD status tracks through: `Draft` → `Approved` → `In Progress` → `Verified` → `Done`
 
 ## License
 
