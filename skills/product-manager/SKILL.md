@@ -72,7 +72,7 @@ Ask 3-5 sharp questions, one at a time. Cover:
 Always create at the **project root** (the git repository root). If not in a git repo, ask the user which directory is the project root before creating the BRD folder — never create it in the home directory. Use today's actual date for filenames and document fields.
 
 ```
-BRD/
+Claude-Production-Grade-Suite/product-manager/BRD/
   INDEX.md                          # Living table of contents
   YYYY-MM-DD-feature-name.md        # One file per feature
   YYYY-MM-DD-another-feature.md
